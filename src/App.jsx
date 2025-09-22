@@ -181,14 +181,15 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen sm:min-h-screen flex items-center justify-center overflow-hidden" style={{minHeight: 'calc(100vh + 2rem)'}}>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${roofingProject})` }}
+          style={{
+            backgroundImage: `url(${constructionTeam})`
+          }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 via-slate-800/50 to-transparent"></div>
-        </div>
-        
+        </div>   
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="glass-hero-card">
             <Badge className="mb-6 glass-badge">

@@ -689,3 +689,16 @@ html {
     font-size: 0.9rem;
   }
 }
+
+/* Enhanced mobile hero section height */
+@media (max-width: 640px) {
+  section:first-of-type {
+    min-height: calc(100vh + 3rem) !important;
+    padding-bottom: 8rem;
+  }
+  
+  /* Ensure background covers full height */
+  section:first-of-type > div:first-child {
+    min-height: calc(100vh + 3rem);
+  }
+}
