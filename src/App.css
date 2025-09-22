@@ -612,3 +612,75 @@ html {
     box-shadow: none !important;
   }
 }
+
+/* Enhanced mobile styles for stats cards */
+.glass-stat-card {
+  padding: 0.75rem;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .glass-stat-card {
+    padding: 1.5rem;
+    min-height: 100px;
+  }
+}
+
+@media (min-width: 768px) {
+  .glass-stat-card {
+    padding: 2rem;
+    min-height: 120px;
+  }
+}
+
+/* Improved mobile hero section spacing */
+@media (max-width: 640px) {
+  .glass-hero-card {
+    margin-bottom: 6rem; /* Add space for stats cards */
+    padding: 1.5rem;
+  }
+  
+  .glass-stat-card {
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Prevent text overflow in mobile stats */
+.glass-stat-card .text-xs,
+.glass-stat-card .text-sm {
+  word-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.2;
+}
+
+/* Better mobile navigation spacing */
+@media (max-width: 768px) {
+  .glass-nav {
+    padding: 0.5rem 0;
+  }
+  
+  .glass-mobile-menu {
+    margin-top: 0.5rem;
+  }
+}
+
+/* Improved mobile button spacing */
+@media (max-width: 640px) {
+  .glass-hero-card .flex.flex-col.sm\\:flex-row {
+    gap: 0.75rem;
+  }
+  
+  .glass-button-primary,
+  .glass-button-secondary {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
