@@ -641,7 +641,7 @@ html {
 /* Improved mobile hero section spacing */
 @media (max-width: 640px) {
   .glass-hero-card {
-    margin-bottom: 6rem; /* Add space for stats cards */
+    margin-bottom: 4rem; /* Add space for stats cards */
     padding: 1.5rem;
   }
   
@@ -650,6 +650,11 @@ html {
     -webkit-backdrop-filter: blur(15px);
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Add bottom padding to hero section */
+  section:first-child {
+    padding-bottom: 6rem;
   }
 }
 

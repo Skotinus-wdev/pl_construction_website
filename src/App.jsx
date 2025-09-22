@@ -224,8 +224,8 @@ function App() {
         </div>
 
         {/* Floating stats */}
-        <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 w-full max-w-4xl px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
+        <div className="absolute bottom-2 sm:bottom-6 left-1/2 transform -translate-x-1/2 w-full max-w-4xl px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
             {stats.map((stat, index) => (
               <div key={index} className="glass-stat-card hover-lift">
                 <div className="text-lg sm:text-2xl md:text-3xl font-bold text-white">
