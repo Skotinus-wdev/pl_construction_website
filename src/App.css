@@ -615,8 +615,8 @@ html {
 
 /* Enhanced mobile styles for stats cards */
 .glass-stat-card {
-  padding: 0.75rem;
-  min-height: 80px;
+  padding: 0.5rem;
+  min-height: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -641,15 +641,22 @@ html {
 /* Improved mobile hero section spacing */
 @media (max-width: 640px) {
   .glass-hero-card {
-    margin-bottom: 6rem; /* Add space for stats cards */
-    padding: 1.5rem;
+    padding: 1rem;
+    margin-bottom: 0; /* Remove margin, handled by parent */
   }
   
   .glass-stat-card {
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 0.4rem;
+    min-height: 55px;
+  }
+  
+  /* Ensure hero section has enough space */
+  section:first-child {
+    padding-bottom: 8rem;
   }
 }
 
