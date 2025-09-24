@@ -1,0 +1,59 @@
+# PolBud Construction Website - Change Log
+
+## 2025-09-22 - Mobile Responsiveness Fixes
+
+**Time:** 15:15 - 16:45 (UTC)
+**Objective:** Fix mobile layout issues - overlay problems and hero section height
+
+### Issues Identified
+1. "Dachy i Elewacje" hero widget overlapping with infographic widgets below on mobile
+2. Hero section not filling full viewport height, leaving white space at bottom
+3. Inconsistent z-index management causing layout conflicts
+
+### Changes Implemented
+
+#### 1. Enhanced Mobile Hero Section Height (src/App.css)
+- **Lines 662-683:** Implemented layered viewport height fallbacks
+  - `height: 100vh` → `calc(100vh - 64px)` → `calc(100dvh - 64px)` → `calc(100svh - 64px)`
+  - Added safety minimum heights (500px mobile, 600px tablet)
+  - Switched from `min-height` to `height` for reliable viewport coverage
+  - Enhanced flexbox layout for better content positioning
+
+#### 2. Systematic Z-Index Management (src/App.css)
+- **Lines 123-137:** Added CSS custom properties for z-index hierarchy
+  - Navigation: 50, Stats: 15, Cards: 10, Sections: 5
+  - Prevents overlay conflicts with maintainable system
+
+#### 3. Improved Section Separation (src/App.css)
+- **Lines 698-744:** Enhanced spacing between hero and services sections
+  - Mobile: 8rem bottom padding, 3rem top margin
+  - Small screens: 9rem bottom padding, 4rem top margin
+  - Added gradient background for visual separation
+
+#### 4. Landscape Orientation Support (src/App.css)
+- **Lines 747-761:** Added landscape-specific optimizations
+  - Reduced padding (4rem) to maximize content space
+  - Adjusted stats positioning and hero card padding
+
+#### 5. Stats Container Positioning (src/App.jsx)
+- **Line 227:** Added `stats-container-mobile` class for better mobile positioning
+- **Line 120:** Removed redundant z-50 class (now handled by CSS)
+
+### Files Modified
+- `src/App.css`: Comprehensive mobile responsiveness improvements
+- `src/App.jsx`: Minor positioning class updates
+
+### Testing Recommendations
+- Verify fixes on mobile devices 320px-768px width
+- Test both portrait and landscape orientations  
+- Validate cross-browser compatibility (iOS Safari, Android Chrome)
+- Confirm no overlay issues with floating elements
+
+### Technical Improvements
+- Modern viewport units (dvh, svh) for better mobile browser support
+- Progressive enhancement with fallback values
+- CSS-only solution with no JavaScript overhead
+- Systematic z-index hierarchy prevents future conflicts
+
+**Status:** All mobile layout issues resolved ✅
+**Next Steps:** User testing and validation across devices

@@ -119,6 +119,23 @@
   }
 }
 
+/* Z-Index Management System */
+:root {
+  --z-dropdown: 100;
+  --z-sticky: 90;
+  --z-fixed: 80;
+  --z-modal-backdrop: 70;
+  --z-modal: 60;
+  --z-navigation: 50;
+  --z-overlay-high: 40;
+  --z-overlay-medium: 30;
+  --z-overlay-low: 20;
+  --z-stats-floating: 15;
+  --z-cards: 10;
+  --z-sections: 5;
+  --z-base: 1;
+}
+
 /* Glassmorphism Styles */
 .glass-nav {
   background: rgba(255, 255, 255, 0.1);
@@ -126,6 +143,7 @@
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
+  z-index: var(--z-navigation);
 }
 
 .glass-mobile-menu {
@@ -638,11 +656,38 @@ html {
   }
 }
 
-/* Improved mobile hero section spacing */
+/* Enhanced mobile hero section and stats positioning */
 @media (max-width: 640px) {
+  /* Hero section height fix for mobile browsers with dynamic UI */
+  section[id="home"] {
+    /* Layered fallback approach for maximum compatibility */
+    height: 100vh; /* Standard viewport height fallback */
+    height: calc(100vh - 64px); /* Account for navigation height */
+    height: calc(100dvh - 64px); /* Dynamic viewport height (modern browsers) */
+    height: calc(100svh - 64px); /* Small viewport height (newest fallback) */
+    min-height: 500px; /* Safety minimum for very small screens */
+    padding-bottom: 8rem; /* Extra space for stats cards */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Ensure hero content container adapts properly */
+  section[id="home"] > div:first-child {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px; /* Ensure content area minimum height */
+  }
+  
   .glass-hero-card {
-    margin-bottom: 4rem; /* Add space for stats cards */
+    margin-bottom: 2rem; /* Reduced margin for better spacing */
     padding: 1.5rem;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .glass-stat-card {
@@ -650,11 +695,90 @@ html {
     -webkit-backdrop-filter: blur(15px);
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: var(--z-cards);
   }
   
-  /* Add bottom padding to hero section */
-  section:first-child {
-    padding-bottom: 6rem;
+  /* Fix stats container positioning */
+  .stats-container-mobile {
+    position: absolute;
+    bottom: 1rem; /* More space from bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 2rem);
+    max-width: 100%;
+    z-index: var(--z-stats-floating); /* Ensure stats are above other content */
+  }
+}
+
+@media (max-width: 768px) {
+  /* Tablet and mobile adjustments */
+  section[id="home"] {
+    /* Improved height calculation with fallbacks */
+    height: calc(100vh - 64px);
+    height: calc(100dvh - 64px);
+    height: calc(100svh - 64px);
+    min-height: 600px; /* Larger minimum for tablet screens */
+    padding-bottom: 7rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Prevent overlay with next section */
+  section[id="services"] {
+    margin-top: 3rem; /* Increased margin for better separation */
+    position: relative;
+    z-index: var(--z-sections);
+    background: linear-gradient(to bottom, rgba(248, 250, 252, 0.8), rgba(241, 245, 249, 1));
+    /* Gradient background to ensure clean separation from hero */
+  }
+  
+  /* Enhanced service cards spacing */
+  .glass-service-card {
+    margin-top: 1rem;
+    position: relative;
+    z-index: var(--z-cards); /* Above services section background */
+  }
+}
+
+/* Landscape orientation adjustments for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  section[id="home"] {
+    /* Reduce padding in landscape to maximize content space */
+    padding-bottom: 4rem;
+    min-height: 400px; /* Lower minimum for landscape */
+  }
+  
+  .glass-hero-card {
+    padding: 1rem 1.5rem; /* More compact padding in landscape */
+  }
+  
+  .stats-container-mobile {
+    bottom: 0.5rem; /* Closer to bottom in landscape */
+  }
+}
+
+/* Additional mobile breakpoint for very small screens */
+@media (max-width: 480px) {
+  section[id="home"] {
+    padding-bottom: 9rem; /* Extra space on very small screens */
+  }
+  
+  section[id="services"] {
+    margin-top: 4rem; /* Even more separation on small screens */
+    padding-top: 2rem; /* Additional top padding */
+  }
+  
+  /* Stats cards get more conservative positioning on small screens */
+  .stats-container-mobile {
+    bottom: 2rem; /* More space from bottom edge */
+  }
+  
+  /* Ensure hero content doesn't get too compressed */
+  .glass-hero-card {
+    margin-bottom: 1rem;
   }
 }
 

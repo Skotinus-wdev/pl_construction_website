@@ -117,7 +117,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
+      <nav className="fixed top-0 left-0 right-0 glass-nav">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
@@ -224,7 +224,7 @@ function App() {
         </div>
 
         {/* Floating stats */}
-        <div className="absolute bottom-2 sm:bottom-6 left-1/2 transform -translate-x-1/2 w-full max-w-4xl px-4">
+        <div className="absolute bottom-2 sm:bottom-6 left-1/2 transform -translate-x-1/2 w-full max-w-4xl px-4 stats-container-mobile">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
             {stats.map((stat, index) => (
               <div key={index} className="glass-stat-card hover-lift">

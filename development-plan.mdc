@@ -1,0 +1,51 @@
+# PolBud Construction Website - Development Plan
+
+## Project Overview
+Modern, mobile-first construction company website showcasing roofing and facade services with glassmorphism design and responsive layout.
+
+## Technology Stack
+- **Frontend:** React.js with Vite
+- **Styling:** Tailwind CSS + Custom CSS (Glassmorphism effects)
+- **UI Components:** Radix UI primitives with custom styling
+- **Icons:** Lucide React
+- **Animations:** CSS transitions and transforms
+- **Package Manager:** PNPM
+
+## Architecture Decisions
+- **Mobile-First Design:** All layouts prioritize mobile experience
+- **Component-Based:** Modular React components for reusability
+- **Modern CSS:** CSS custom properties, viewport units (vh/dvh/svh), flexbox
+- **Glassmorphism UI:** Semi-transparent cards with backdrop blur effects
+- **Single Page Application:** Smooth scroll navigation between sections
+
+## Core Features
+1. **Hero Section:** Full-viewport hero with company branding and floating statistics
+2. **Services Section:** Three main service categories with detailed descriptions
+3. **Portfolio Section:** Project showcase with categorized examples
+4. **About Section:** Company information and experience highlights
+5. **Contact Section:** Contact form and company information
+6. **Responsive Navigation:** Fixed header with mobile hamburger menu
+
+## Mobile Responsiveness Strategy
+- **Breakpoints:** 480px, 640px, 768px, 1024px+
+- **Viewport Units:** Progressive fallbacks (vh → dvh → svh)
+- **Touch-Friendly:** Adequate button sizes and spacing
+- **Performance:** Optimized images and minimal JavaScript
+
+## Recent Improvements (September 2025)
+- Fixed mobile overlay issues with systematic z-index management
+- Implemented proper hero section height for all mobile browsers
+- Enhanced spacing and positioning for optimal mobile experience
+- Added landscape orientation optimizations
+
+## Development Workflow
+- Component development in `src/components/`
+- Styling in `src/App.css` with mobile-first approach
+- Testing across multiple devices and browsers
+- Performance monitoring and optimization
+
+## Future Considerations
+- Progressive Web App (PWA) capabilities
+- Advanced animations and micro-interactions
+- Multi-language support (Polish/English)
+- Content Management System integration
