@@ -1,497 +1,354 @@
-import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button.jsx'
-import { Card, CardContent } from '@/components/ui/card.jsx'
-import { Badge } from '@/components/ui/badge.jsx'
-import { 
-  Home, 
-  Building, 
-  Wrench, 
-  Users, 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Star,
-  CheckCircle,
-  ArrowRight,
-  Menu,
-  X
-} from 'lucide-react'
-import './App.css'
-import ContactForm from './components/ContactForm'
-import AnimatedCounter from './components/AnimatedCounter'
+import React, { useState } from 'react';
+import './App.css';
 
 // Import images
-import roofingWorkers from './assets/roofing-workers.jpg'
-import roofingProject from './assets/roofing-project.jpg'
-import modernFacade from './assets/modern-facade.jpg'
-import constructionTeam from './assets/construction-team.jpg'
-import metalTexture from './assets/metal-roof-texture.jpg'
-import concreteTexture from './assets/concrete-texture.jpg'
-import brickTexture from './assets/brick-texture.jpg'
+import heroBg from './assets/hero-bg.jpg';
+import constructionTeam from './assets/construction-team.jpg';
+import modernFacade from './assets/modern-facade.jpg';
+import roofingProject from './assets/roofing-project.jpg';
+
+// Import components
+import LanguageSwitcher from './components/LanguageSwitcher';
+import ServiceSection from './components/ServiceSection';
+import Portfolio from './components/Portfolio';
+import About from './components/About';
+import Reviews from './components/Reviews';
+import Footer from './components/Footer';
+import ContactForm from './components/ContactForm';
+
+// Import translations
+import { useTranslation } from './translations';
 
 function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('home')
+  const [language, setLanguage] = useState('pl');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useTranslation(language);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'services', 'portfolio', 'about', 'contact']
-      const scrollPosition = window.scrollY + 100
-
-      for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element) {
-          const { offsetTop, offsetHeight } = element
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section)
-            break
-          }
-        }
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const handleLanguageChange = (newLanguage) => {
+    setLanguage(newLanguage);
+  };
 
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
+    const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+      element.scrollIntoView({ behavior: 'smooth' });
     }
-    setIsMenuOpen(false)
-  }
+    setIsMenuOpen(false);
+  };
 
-  const services = [
-    {
-      icon: <Home className="w-8 h-8" />,
-      title: "Pokrycia Dachowe",
-      description: "Kompleksowe wykonanie dachów z różnych materiałów: dachówka ceramiczna, blachodachówka, blachy trapezowe.",
-      features: ["Montaż nowych dachów", "Remonty i naprawy", "Okna dachowe", "Systemy rynnowe"],
-      texture: metalTexture
-    },
-    {
-      icon: <Building className="w-8 h-8" />,
-      title: "Elewacje i Docieplenia",
-      description: "Profesjonalne wykonanie elewacji wentylowanych, dociepleń budynków oraz systemów fasadowych.",
-      features: ["Elewacje wentylowane", "Docieplenia budynków", "Systemy ETICS", "Tynki dekoracyjne"],
-      texture: brickTexture
-    },
-    {
-      icon: <Wrench className="w-8 h-8" />,
-      title: "Usługi Specjalistyczne",
-      description: "Dodatkowe usługi budowlane: konstrukcje stalowe, izolacje, konserwacje i przeglądy techniczne.",
-      features: ["Konstrukcje stalowe", "Izolacje", "Konserwacje", "Przeglądy techniczne"],
-      texture: concreteTexture
-    }
-  ]
+  // Service icons
+  const roofingIcon = (
+    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+    </svg>
+  );
 
-  const portfolio = [
-    {
-      title: "Nowoczesny Kompleks Biurowy",
-      category: "Elewacje",
-      image: modernFacade,
-      description: "Realizacja elewacji wentylowanej z paneli HPL"
-    },
-    {
-      title: "Dom Jednorodzinny",
-      category: "Dachy",
-      image: roofingProject,
-      description: "Pokrycie dachowe z blachodachówki premium"
-    },
-    {
-      title: "Centrum Handlowe",
-      category: "Kompleksowo",
-      image: roofingWorkers,
-      description: "Pełna realizacja dachu i elewacji"
-    }
-  ]
+  const drainageIcon = (
+    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+      <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732L14.146 12.8l-1.179 4.456a1 1 0 01-1.934 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732L9.854 7.2l1.179-4.456A1 1 0 0112 2z" clipRule="evenodd" />
+    </svg>
+  );
 
-  const stats = [
-    { number: "500+", label: "Zrealizowanych Projektów" },
-    { number: "15", label: "Lat Doświadczenia" },
-    { number: "50+", label: "Zadowolonych Klientów" },
-    { number: "24/7", label: "Wsparcie Techniczne" }
-  ]
+  const sidingIcon = (
+    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+    </svg>
+  );
+
+  const chimneyIcon = (
+    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+      <path fillRule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 1a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
+    </svg>
+  );
+
+  const additionalIcon = (
+    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+      <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
+    </svg>
+  );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
+    <div className="App">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-orange-500 rounded-lg flex items-center justify-center">
-                <Building className="w-6 h-6 text-white" />
+            
+            {/* Logo */}
+            <div className="flex items-center">
+              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center mr-3">
+                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                </svg>
               </div>
-              <span className="text-xl font-bold text-slate-800">PolBud</span>
+              <div className="text-white">
+                <div className="font-bold text-lg">TWÓJ DEKARZ</div>
+                <div className="text-xs text-gray-300">Dominik Gołębiowski</div>
+              </div>
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex space-x-8">
-              {['home', 'services', 'portfolio', 'about', 'contact'].map((section) => (
-                <button
-                  key={section}
-                  onClick={() => scrollToSection(section)}
-                  className={`nav-link ${activeSection === section ? 'active' : ''}`}
-                >
-                  {section === 'home' && 'Strona Główna'}
-                  {section === 'services' && 'Usługi'}
-                  {section === 'portfolio' && 'Realizacje'}
-                  {section === 'about' && 'O Nas'}
-                  {section === 'contact' && 'Kontakt'}
-                </button>
-              ))}
+            <div className="hidden md:flex items-center space-x-8">
+              <button 
+                onClick={() => scrollToSection('home')}
+                className="text-gray-300 hover:text-white transition-colors duration-200"
+              >
+                {t('nav.home')}
+              </button>
+              <button 
+                onClick={() => scrollToSection('services')}
+                className="text-gray-300 hover:text-white transition-colors duration-200"
+              >
+                {t('nav.services')}
+              </button>
+              <button 
+                onClick={() => scrollToSection('portfolio')}
+                className="text-gray-300 hover:text-white transition-colors duration-200"
+              >
+                {t('nav.portfolio')}
+              </button>
+              <button 
+                onClick={() => scrollToSection('about')}
+                className="text-gray-300 hover:text-white transition-colors duration-200"
+              >
+                {t('nav.about')}
+              </button>
+              <button 
+                onClick={() => scrollToSection('reviews')}
+                className="text-gray-300 hover:text-white transition-colors duration-200"
+              >
+                {t('nav.reviews')}
+              </button>
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className="text-gray-300 hover:text-white transition-colors duration-200"
+              >
+                {t('nav.contact')}
+              </button>
+              
+              {/* Language Switcher */}
+              <LanguageSwitcher 
+                currentLanguage={language}
+                onLanguageChange={handleLanguageChange}
+              />
             </div>
 
             {/* Mobile menu button */}
-            <div className="md:hidden">
-              <Button
-                variant="ghost"
-                size="sm"
+            <div className="md:hidden flex items-center space-x-4">
+              <LanguageSwitcher 
+                currentLanguage={language}
+                onLanguageChange={handleLanguageChange}
+              />
+              <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="glass-button"
+                className="text-gray-300 hover:text-white"
               >
-                {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </Button>
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {isMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
             </div>
           </div>
-        </div>
 
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden glass-mobile-menu">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {['home', 'services', 'portfolio', 'about', 'contact'].map((section) => (
-                <button
-                  key={section}
-                  onClick={() => scrollToSection(section)}
-                  className="mobile-nav-link"
+          {/* Mobile Navigation */}
+          {isMenuOpen && (
+            <div className="md:hidden py-4 border-t border-white/10">
+              <div className="flex flex-col space-y-4">
+                <button 
+                  onClick={() => scrollToSection('home')}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-left"
                 >
-                  {section === 'home' && 'Strona Główna'}
-                  {section === 'services' && 'Usługi'}
-                  {section === 'portfolio' && 'Realizacje'}
-                  {section === 'about' && 'O Nas'}
-                  {section === 'contact' && 'Kontakt'}
+                  {t('nav.home')}
                 </button>
-              ))}
+                <button 
+                  onClick={() => scrollToSection('services')}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-left"
+                >
+                  {t('nav.services')}
+                </button>
+                <button 
+                  onClick={() => scrollToSection('portfolio')}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-left"
+                >
+                  {t('nav.portfolio')}
+                </button>
+                <button 
+                  onClick={() => scrollToSection('about')}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-left"
+                >
+                  {t('nav.about')}
+                </button>
+                <button 
+                  onClick={() => scrollToSection('reviews')}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-left"
+                >
+                  {t('nav.reviews')}
+                </button>
+                <button 
+                  onClick={() => scrollToSection('contact')}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-left"
+                >
+                  {t('nav.contact')}
+                </button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen sm:min-h-screen flex items-center justify-center overflow-hidden" style={{minHeight: 'calc(100vh + 2rem)'}}>
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{minHeight: 'calc(100vh + 2rem)'}}>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url(${constructionTeam})`
+            backgroundImage: `url(${heroBg})`
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 via-slate-800/50 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-800/60 to-slate-900/80"></div>
         </div>   
+        
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="glass-hero-card">
-            <Badge className="mb-6 glass-badge">
-              Profesjonalne Usługi Budowlane
-            </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              Dachy i Elewacje
-              <span className="block text-orange-400">Najwyższej Jakości</span>
+            <div className="mb-6">
+              <span className="inline-block px-4 py-2 bg-blue-600/20 text-blue-300 rounded-full text-sm font-semibold backdrop-blur-sm border border-blue-400/30">
+                {t('hero.badge')}
+              </span>
+            </div>
+            
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-4">
+              {t('hero.title')}
             </h1>
-            <p className="text-xl text-slate-200 mb-8 max-w-3xl mx-auto">
-              Specjalizujemy się w kompleksowym wykonawstwie pokryć dachowych i elewacji. 
-              15 lat doświadczenia, nowoczesne technologie i materiały najwyższej jakości.
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500 mb-8">
+              {t('hero.subtitle')}
+            </div>
+            
+            <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+              {t('hero.description')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="glass-button-primary"
+
+            <div className="text-2xl font-bold text-orange-400 mb-8">
+              {t('hero.phone')}
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+              <button 
                 onClick={() => scrollToSection('contact')}
+                className="glass-button-primary px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 hover:scale-105"
               >
-                Bezpłatna Wycena
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="glass-button-secondary"
+                {t('hero.cta1')} →
+              </button>
+              <button 
                 onClick={() => scrollToSection('portfolio')}
+                className="glass-button-secondary px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 hover:scale-105"
               >
-                Zobacz Realizacje
-              </Button>
+                {t('hero.cta2')}
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Floating stats */}
-        <div className="absolute bottom-2 sm:bottom-6 left-1/2 transform -translate-x-1/2 w-full max-w-4xl px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-            {stats.map((stat, index) => (
-              <div key={index} className="glass-stat-card hover-lift">
-                <div className="text-lg sm:text-2xl md:text-3xl font-bold text-white">
-                  <AnimatedCounter end={stat.number} duration={2000} />
-                </div>
-                <div className="text-xs sm:text-sm text-slate-300 leading-tight">
-                  {stat.label}
-                </div>
+        {/* Stats Cards */}
+        <div className="absolute bottom-2 sm:bottom-6 left-4 right-4 z-20">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              <div className="glass-stats-card text-center p-3 sm:p-4">
+                <div className="text-2xl sm:text-3xl font-bold text-white mb-1">500+</div>
+                <div className="text-xs sm:text-sm text-gray-300">Zrealizowanych Projektów</div>
               </div>
-            ))}
+              <div className="glass-stats-card text-center p-3 sm:p-4">
+                <div className="text-2xl sm:text-3xl font-bold text-white mb-1">15</div>
+                <div className="text-xs sm:text-sm text-gray-300">Lat Doświadczenia</div>
+              </div>
+              <div className="glass-stats-card text-center p-3 sm:p-4">
+                <div className="text-2xl sm:text-3xl font-bold text-white mb-1">50+</div>
+                <div className="text-xs sm:text-sm text-gray-300">Zadowolonych Klientów</div>
+              </div>
+              <div className="glass-stats-card text-center p-3 sm:p-4">
+                <div className="text-2xl sm:text-3xl font-bold text-white mb-1">24/7</div>
+                <div className="text-xs sm:text-sm text-gray-300">Wsparcie Techniczne</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="py-20 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <Badge className="mb-4 glass-badge">Nasze Usługi</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">
-              Kompleksowe Rozwiązania Budowlane
-            </h2>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              Oferujemy pełen zakres usług związanych z pokryciami dachowymi i elewacjami. 
-              Każdy projekt realizujemy z najwyższą starannością i dbałością o detale.
-            </p>
-          </div>
+      {/* Services Sections */}
+      <div id="services">
+        <ServiceSection
+          title={t('services.roofing.title')}
+          description={t('services.roofing.description')}
+          items={t('services.roofing.items')}
+          backgroundImage={constructionTeam}
+          icon={roofingIcon}
+          reverse={false}
+        />
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Card key={index} className={`glass-service-card group hover-lift ${index === 0 ? 'metal-texture' : index === 1 ? 'brick-texture' : 'concrete-texture'} texture-overlay`}>
-                <CardContent className="p-8">
-                  <div 
-                    className="w-16 h-16 rounded-xl mb-6 flex items-center justify-center text-white service-icon"
-                    style={{ 
-                      backgroundImage: `url(${service.texture})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center'
-                    }}
-                  >
-                    <div className="bg-gradient-to-br from-blue-600/90 to-orange-500/90 w-full h-full rounded-xl flex items-center justify-center">
-                      {service.icon}
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-4">{service.title}</h3>
-                  <p className="text-slate-600 mb-6">{service.description}</p>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-sm text-slate-600">
-                        <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+        <ServiceSection
+          title={t('services.drainage.title')}
+          description={t('services.drainage.description')}
+          items={t('services.drainage.items')}
+          backgroundImage={roofingProject}
+          icon={drainageIcon}
+          reverse={true}
+        />
+
+        <ServiceSection
+          title={t('services.siding.title')}
+          description={t('services.siding.description')}
+          items={t('services.siding.items')}
+          backgroundImage={modernFacade}
+          icon={sidingIcon}
+          reverse={false}
+        />
+
+        <ServiceSection
+          title={t('services.chimney.title')}
+          description={t('services.chimney.description')}
+          items={t('services.chimney.items')}
+          backgroundImage={constructionTeam}
+          icon={chimneyIcon}
+          reverse={true}
+        />
+
+        <ServiceSection
+          title={t('services.additional.title')}
+          description={t('services.additional.description')}
+          items={t('services.additional.items')}
+          backgroundImage={roofingProject}
+          icon={additionalIcon}
+          reverse={false}
+        />
+      </div>
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="py-20 bg-gradient-to-br from-slate-100 to-blue-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <Badge className="mb-4 glass-badge">Nasze Realizacje</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">
-              Projekty, Którymi Się Szczycimy
-            </h2>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              Każdy projekt to dla nas wyzwanie i możliwość pokazania naszych umiejętności. 
-              Zobacz wybrane realizacje z naszego portfolio.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {portfolio.map((project, index) => (
-              <Card key={index} className="glass-portfolio-card group overflow-hidden hover-lift">
-                <div className="relative h-64 overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent"></div>
-                  <Badge className="absolute top-4 left-4 glass-badge">
-                    {project.category}
-                  </Badge>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-slate-800 mb-2">{project.title}</h3>
-                  <p className="text-slate-600">{project.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <div id="portfolio">
+        <Portfolio t={t} />
+      </div>
 
       {/* About Section */}
-      <section id="about" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <Badge className="mb-4 glass-badge">O Nas</Badge>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">
-                15 Lat Doświadczenia w Budownictwie
-              </h2>
-              <p className="text-lg text-slate-600 mb-6">
-                Jesteśmy dynamicznie rozwijającą się firmą budowlaną działającą na terenie 
-                całej Polski. Specjalizujemy się w usługach remontowo-budowlanych dla 
-                spółdzielni mieszkaniowych oraz klientów indywidualnych.
-              </p>
-              <p className="text-slate-600 mb-8">
-                Nasze doświadczenie w tej branży sięga początków pracy zawodowej właściciela firmy, 
-                który od prawie 20 lat dzieli się swoją pasją i wiedzą poprzez doradztwo przy 
-                budowie domów i wykonywaniu pokryć dachowych.
-              </p>
-              
-              <div className="grid grid-cols-2 gap-6 mb-8">
-                <div className="glass-feature-card">
-                  <Star className="w-8 h-8 text-orange-500 mb-2" />
-                  <h4 className="font-semibold text-slate-800">Jakość</h4>
-                  <p className="text-sm text-slate-600">Materiały najwyższej jakości</p>
-                </div>
-                <div className="glass-feature-card">
-                  <CheckCircle className="w-8 h-8 text-green-500 mb-2" />
-                  <h4 className="font-semibold text-slate-800">Gwarancja</h4>
-                  <p className="text-sm text-slate-600">Do 50 lat gwarancji</p>
-                </div>
-              </div>
+      <div id="about">
+        <About t={t} />
+      </div>
 
-              <Button 
-                size="lg" 
-                className="glass-button-primary"
-                onClick={() => scrollToSection('contact')}
-              >
-                Skontaktuj się z nami
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </div>
-
-            <div className="relative">
-              <div className="glass-image-card">
-                <img 
-                  src={constructionTeam} 
-                  alt="Nasz zespół" 
-                  className="w-full h-96 object-cover rounded-2xl"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Reviews Section */}
+      <div id="reviews">
+        <Reviews t={t} />
+      </div>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gradient-to-br from-slate-800 to-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <Badge className="mb-4 glass-badge-dark">Kontakt</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Skontaktuj się z nami
-            </h2>
-            <p className="text-lg text-slate-300 max-w-3xl mx-auto">
-              Masz pytania? Potrzebujesz wyceny? Skontaktuj się z nami już dziś. 
-              Odpowiemy na wszystkie Twoje pytania i przygotujemy bezpłatną wycenę.
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-8 mb-16">
-            <Card className="glass-contact-card">
-              <CardContent className="p-8 text-center">
-                <Phone className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">Telefon</h3>
-                <p className="text-slate-300 mb-4">Zadzwoń do nas</p>
-                <a href="tel:+48123456789" className="text-blue-400 hover:text-blue-300 font-semibold">
-                  +48 123 456 789
-                </a>
-              </CardContent>
-            </Card>
-
-            <Card className="glass-contact-card">
-              <CardContent className="p-8 text-center">
-                <Mail className="w-12 h-12 text-orange-400 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">Email</h3>
-                <p className="text-slate-300 mb-4">Napisz do nas</p>
-                <a href="mailto:kontakt@polbud.pl" className="text-orange-400 hover:text-orange-300 font-semibold">
-                  kontakt@polbud.pl
-                </a>
-              </CardContent>
-            </Card>
-
-            <Card className="glass-contact-card">
-              <CardContent className="p-8 text-center">
-                <MapPin className="w-12 h-12 text-green-400 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">Adres</h3>
-                <p className="text-slate-300 mb-4">Odwiedź nas</p>
-                <p className="text-green-400 font-semibold">
-                  ul. Budowlana 123<br />
-                  00-001 Warszawa
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="mt-16">
-            <ContactForm />
-          </div>
-        </div>
-      </section>
+      <div id="contact">
+        <ContactForm t={t} />
+      </div>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-orange-500 rounded-lg flex items-center justify-center">
-                  <Building className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-lg font-bold">PolBud</span>
-              </div>
-              <p className="text-slate-400">
-                Profesjonalne usługi budowlane. Dachy i elewacje najwyższej jakości.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Usługi</h4>
-              <ul className="space-y-2 text-slate-400">
-                <li>Pokrycia Dachowe</li>
-                <li>Elewacje</li>
-                <li>Docieplenia</li>
-                <li>Konstrukcje Stalowe</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Firma</h4>
-              <ul className="space-y-2 text-slate-400">
-                <li>O Nas</li>
-                <li>Realizacje</li>
-                <li>Kontakt</li>
-                <li>Kariera</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Kontakt</h4>
-              <ul className="space-y-2 text-slate-400">
-                <li>+48 123 456 789</li>
-                <li>kontakt@polbud.pl</li>
-                <li>ul. Budowlana 123</li>
-                <li>00-001 Warszawa</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-slate-800 mt-8 pt-8 text-center text-slate-400">
-            <p>&copy; 2025 PolBud. Wszystkie prawa zastrzeżone.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer t={t} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
