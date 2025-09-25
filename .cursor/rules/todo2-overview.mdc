@@ -1,0 +1,55 @@
+---
+description: Todo2 task overview for Cursor AI awareness - provides real-time context of current project tasks, priorities, and progress
+alwaysApply: true
+---
+
+# Todo2 Project Context
+
+*Last updated: 09/22/2025, 03:38 PM*
+*Generated automatically from .todo2/state.todo2.json*
+
+## Current Task Overview (Last 20 Tasks - Newest First)
+
+### T-1: Analyze current mobile layout issues
+- **Status:** Review ❓ | **Priority:** high 🟠 | **Created:** 09/22/2025, 03:31 PM | **Updated:** 09/22/2025, 03:33 PM
+- **Tags:** #mobile #responsive #analysis #css
+- **Dependencies:** None
+- **Comments**: 1 research_with_links, 1 result, 0 notes, 0 manualsetup
+- **Status:** Review
+- **Key Insight:** Mobile Layout Analysis Completed Successfully ✅ Key Issues Identified: 1. Hero Section Height Problem: - Current: Uses min-h-screen which doesn't account for mobile browser UI elements (address bars, navigation bars) - Issue: Creates white space below hero section on mobile devices - Root Cause: ...
+
+### T-2: Fix 'Dachy i Elewacje' widget overlay issue
+- **Status:** Review ❓ | **Priority:** critical 🔴 | **Created:** 09/22/2025, 03:31 PM | **Updated:** 09/22/2025, 03:35 PM
+- **Tags:** #mobile #overlay #css #responsive
+- **Dependencies:** T-1
+- **Comments**: 1 research_with_links, 1 result, 0 notes, 0 manualsetup
+- **Status:** Review
+- **Key Insight:** 'Dachy i Elewacje' Widget Overlay Issue Successfully Fixed ✅ Problem Resolved: - Issue: 'Dachy i Elewacje' hero content and stats widgets were overlapping with infographic/service widgets below on mobile devices - Root Cause: Insufficient bottom spacing in hero section, inadequate margin-top in s...
+
+### T-3: Fix hero section height for mobile devices
+- **Status:** Review ❓ | **Priority:** critical 🔴 | **Created:** 09/22/2025, 03:31 PM | **Updated:** 09/22/2025, 03:38 PM
+- **Tags:** #mobile #hero #height #viewport
+- **Dependencies:** T-1
+- **Comments**: 1 research_with_links, 1 result, 0 notes, 0 manualsetup
+- **Status:** Review
+- **Key Insight:** Hero Section Height Mobile Issue Successfully Resolved ✅ Problem Solved: - Issue: Hero section not filling full viewport height on mobile devices, leaving white space at bottom of screen - Root Cause: min-h-screen class doesn't account for mobile browser dynamic UI elements (address bars, navigat...
+
+
+## Task Statistics
+- **Total Tasks:** 3
+- **In Progress:** 0 tasks
+- **Todo:** 0 tasks  
+- **Done:** 0 tasks
+- **High Priority:** 1 tasks
+- **Critical Priority:** 2 tasks
+- **Tasks with Dependencies:** 2 tasks
+
+## Recent Activity
+- T-1: Updated (09/22/2025, 03:33 PM)
+- T-2: Updated (09/22/2025, 03:35 PM)
+- T-3: Updated (09/22/2025, 03:38 PM)
+
+## Key Project Context
+This is an implementation of an automated cursor rules system that will maintain real-time awareness of Todo2 task status for enhanced AI assistance. The system monitors task changes and automatically updates this overview file to provide contextual information to Cursor chat.
+
+*This file is automatically maintained by Todo2. Last generation: 09/22/2025, 15:38:04*

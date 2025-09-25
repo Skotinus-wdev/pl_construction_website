@@ -6,6 +6,14 @@ import heroBg from './assets/hero-bg.jpg';
 import constructionTeam from './assets/construction-team.jpg';
 import modernFacade from './assets/modern-facade.jpg';
 import roofingProject from './assets/roofing-project.jpg';
+import roofCrossSection from './assets/roof_cross_section.png';
+import roofDrainage from './assets/roof_drainage.jpg';
+import drainageScTr from './assets/drainage_sc_tr.png';
+import sidingSchemeTp from './assets/siding_scheme_tp.png';
+import roofScheme from './assets/roof_scheme.png';
+import chimneyBg from './assets/chimney_bg.png';
+import chimneyScheme from './assets/chimney_scheme.png';
+import extraServicesTr from './assets/extra_services_tr.png';
 
 // Import components
 import LanguageSwitcher from './components/LanguageSwitcher';
@@ -283,45 +291,54 @@ function App() {
           title={t('services.roofing.title')}
           description={t('services.roofing.description')}
           items={t('services.roofing.items')}
-          backgroundImage={constructionTeam}
+          backgroundColor="#64748B"
           icon={roofingIcon}
           reverse={false}
+          imageSrc={roofScheme}
+          customHeight="h-[500px] lg:h-[800px]"
         />
 
         <ServiceSection
           title={t('services.drainage.title')}
           description={t('services.drainage.description')}
           items={t('services.drainage.items')}
-          backgroundImage={roofingProject}
+          backgroundImage={roofDrainage}
           icon={drainageIcon}
           reverse={true}
+          imageSrc={drainageScTr}
         />
 
         <ServiceSection
           title={t('services.siding.title')}
           description={t('services.siding.description')}
           items={t('services.siding.items')}
-          backgroundImage={modernFacade}
+          backgroundColor="#64748B"
           icon={sidingIcon}
           reverse={false}
+          imageSrc={sidingSchemeTp}
+          customHeight="h-[500px] lg:h-[700px]"
         />
 
         <ServiceSection
           title={t('services.chimney.title')}
           description={t('services.chimney.description')}
           items={t('services.chimney.items')}
-          backgroundImage={constructionTeam}
+          backgroundImage={chimneyBg}
           icon={chimneyIcon}
           reverse={true}
+          imageSrc={chimneyScheme}
+          customHeight="h-[500px] lg:h-[700px]"
         />
 
         <ServiceSection
           title={t('services.additional.title')}
           description={t('services.additional.description')}
           items={t('services.additional.items')}
-          backgroundImage={roofingProject}
+          backgroundColor="#64748B"
           icon={additionalIcon}
           reverse={false}
+          imageSrc={extraServicesTr}
+          customHeight="h-[500px] lg:h-[700px]"
         />
       </div>
 

@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import roofCrossSection from '../assets/roof_cross_section.png';
+import modernFacade from '../assets/modern-facade.jpg';
+import heroBg from '../assets/hero-bg.jpg';
+import restoration from '../assets/restoration.png';
+import industrialRoof from '../assets/industrial_roof.png';
+import shoppingCFacade from '../assets/shopping_c_facade.jpg';
 
 const Portfolio = ({ t }) => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -14,7 +20,7 @@ const Portfolio = ({ t }) => {
       area: "450",
       duration: "3 weeks",
       featured: true,
-      image: "/api/placeholder/400/300"
+      image: roofCrossSection
     },
     {
       id: 2,
@@ -26,7 +32,7 @@ const Portfolio = ({ t }) => {
       area: "1200",
       duration: "6 weeks",
       featured: true,
-      image: "/api/placeholder/400/300"
+      image: modernFacade
     },
     {
       id: 3,
@@ -38,7 +44,7 @@ const Portfolio = ({ t }) => {
       area: "2800",
       duration: "8 months",
       featured: false,
-      image: "/api/placeholder/400/300"
+      image: heroBg
     },
     {
       id: 4,
@@ -50,7 +56,7 @@ const Portfolio = ({ t }) => {
       area: "800",
       duration: "4 months",
       featured: false,
-      image: "/api/placeholder/400/300"
+      image: restoration
     },
     {
       id: 5,
@@ -62,7 +68,7 @@ const Portfolio = ({ t }) => {
       area: "3500",
       duration: "5 weeks",
       featured: false,
-      image: "/api/placeholder/400/300"
+      image: industrialRoof
     },
     {
       id: 6,
@@ -74,7 +80,7 @@ const Portfolio = ({ t }) => {
       area: "1800",
       duration: "7 weeks",
       featured: false,
-      image: "/api/placeholder/400/300"
+      image: shoppingCFacade
     }
   ];
 
@@ -129,17 +135,25 @@ const Portfolio = ({ t }) => {
               className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105"
             >
               {/* Image */}
-              <div className="relative h-64 bg-gray-200">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center">
-                  <div className="text-center text-gray-500">
-                    <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-gray-300 flex items-center justify-center">
-                      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-                      </svg>
+              <div className="relative h-64 bg-gray-200 overflow-hidden">
+                {item.image && typeof item.image === 'string' && item.image.startsWith('/api/placeholder') ? (
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center">
+                    <div className="text-center text-gray-500">
+                      <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-gray-300 flex items-center justify-center">
+                        <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <p className="font-medium">Project Image</p>
                     </div>
-                    <p className="font-medium">Project Image</p>
                   </div>
-                </div>
+                ) : (
+                  <img 
+                    src={item.image} 
+                    alt={item.title}
+                    className="w-full h-full object-cover"
+                  />
+                )}
                 
                 {/* Category Badge */}
                 <div className="absolute top-4 left-4">

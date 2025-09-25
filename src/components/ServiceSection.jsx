@@ -5,18 +5,30 @@ const ServiceSection = ({
   description, 
   items, 
   backgroundImage, 
+  backgroundColor,
   reverse = false,
-  icon 
+  icon,
+  imageSrc,
+  customHeight
 }) => {
   return (
     <section className="relative min-h-screen flex items-center py-20">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-800/60 to-slate-900/80"></div>
-      </div>
+      {/* Background */}
+      {backgroundColor ? (
+        <div 
+          className="absolute inset-0"
+          style={{ backgroundColor: backgroundColor }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/20 via-slate-800/10 to-slate-900/20"></div>
+        </div>
+      ) : (
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-800/60 to-slate-900/80"></div>
+        </div>
+      )}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className={`grid lg:grid-cols-3 gap-12 items-center ${reverse ? 'lg:grid-flow-col-dense' : ''}`}>
@@ -63,18 +75,26 @@ const ServiceSection = ({
             </div>
           </div>
 
-          {/* Image Placeholder Side */}
+          {/* Image Side */}
           <div className={`lg:col-span-2 ${reverse ? 'lg:col-start-1' : ''}`}>
-            <div className="h-96 lg:h-[600px] rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/20 flex items-center justify-center">
-              <div className="text-center text-white/60">
-                <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center">
-                  <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-                  </svg>
+            <div className={`${customHeight ? customHeight : 'h-96 lg:h-[600px]'} rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/20 flex items-center justify-center overflow-hidden`}>
+              {imageSrc ? (
+                <img 
+                  src={imageSrc} 
+                  alt={`${title} service illustration`}
+                  className="w-full h-full object-cover rounded-3xl"
+                />
+              ) : (
+                <div className="text-center text-white/60">
+                  <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center">
+                    <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <p className="text-lg font-medium">Service Image</p>
+                  <p className="text-sm opacity-75">2/3 page width</p>
                 </div>
-                <p className="text-lg font-medium">Service Image</p>
-                <p className="text-sm opacity-75">2/3 page width</p>
-              </div>
+              )}
             </div>
           </div>
 
